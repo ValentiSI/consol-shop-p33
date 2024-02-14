@@ -1,1 +1,0 @@
-# consol-shop-p33
