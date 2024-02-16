@@ -9,7 +9,11 @@ class User(Table):
 
 class Product(Table):
     id = column_types.IdColumn()
+<<<<<<< HEAD
     title = column_types.TextColumn(unique=True)
+=======
+    title = column_types.TextColumn(unique=True)
+>>>>>>> 75f846791361390cfca2fc0579e8fd6ef0a1b739
     price = column_types.NumericColumn()
 
 
