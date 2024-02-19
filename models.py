@@ -16,3 +16,5 @@ class Product(Table):
 class ProductInBasket(Table):
     id = column_types.IdColumn()
     product_id = column_types.IntegerColumn()
+    user_id = column_types.IntegerColumn()
+    count = column_types.IntegerColumn()

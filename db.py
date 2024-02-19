@@ -10,4 +10,17 @@ class DB(DBContext):
         super().__init__(file_dir, file_name)
         self.users = User(self, 'users')
         self.products = Product(self, 'products')
-        self.products_in_basket = ProductInBasket(self, 'products_in_basket')
+        self.products_in_basket = ProductInBasket(
+            self,
+            'products_in_basket',
+            (
+                '''
+                    FOREIGN KEY (product_id) REFERENCES products (id)
+                    ON UPDATE CASCADE ON DELETE CASCADE
+                ''',
+                '''
+                    FOREIGN KEY (user_id) REFERENCES users (id)
+                    ON UPDATE CASCADE ON DELETE CASCADE
+                '''
+            )
+        )
