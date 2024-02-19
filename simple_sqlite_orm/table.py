@@ -1,15 +1,6 @@
 from .base_column import Column
 
 
-# class TableMeta:
-#     def __prepare__(cls, name, bases, **kwargs):
-
-
-#     def __new__(cls, name, bases, attrs):
-#         _object = super().__new__(cls, name, bases, attrs)
-
-#         return _object
-
 class Table:
     @classmethod
     def _get_columns(cls):
