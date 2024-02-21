@@ -1,6 +1,7 @@
 from db import DB
 from auth import authorize_user
 
+
 def main():
     db_context = DB()
     user = authorize_user(db_context)

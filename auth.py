@@ -24,6 +24,7 @@ def register_user(db: DB):
         not is_valid_password(password) or
         password != password_repeat
     ):
+        print('Wrong email or password. Try again.')
         return register_user(db)
 
     return db.users.insert(db.users.model(None, email, password))
@@ -45,7 +46,7 @@ def login_user(db: DB):
 def authorize_user(db: DB):
     print("Please, authorize:")
 
-    choice = input("1. Sign in\n2. Sign up")
+    choice = input("1. Sign in\n2. Sign up\n")
 
     if choice == "2":
         return register_user(db)

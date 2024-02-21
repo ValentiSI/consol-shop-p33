@@ -9,7 +9,7 @@ class User(Table):
     def authenticate(self, email, password):
         user = self.getBy(self.email, email)
 
-        if user.password != password:
+        if user is None or user.password != password:
             return None
 
         return user
