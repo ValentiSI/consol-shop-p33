@@ -6,6 +6,14 @@ class User(Table):
     email = column_types.TextColumn(unique=True)
     password = column_types.TextColumn()
 
+    def authenticate(self, email, password):
+        user = self.getBy(self.email, email)
+
+        if user.password != password:
+            return None
+
+        return user
+
 
 class Product(Table):
     id = column_types.IdColumn()
