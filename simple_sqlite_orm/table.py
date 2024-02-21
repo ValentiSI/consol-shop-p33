@@ -70,12 +70,17 @@ class Table:
 
         return value
 
-    def getBy(self, column: Column, value: str):
+    def getBy(self, column: Column, value):
         self.db.execute(f'''
             SELECT * FROM {self.name}
-            WHERE {column.name} = '{self._sqlValueByType(value)}';
+            WHERE {column.name} = {self._sqlValueByType(value)};
         ''')
-        return self.model(*self.db.getOne())
+        obj = self.db.getOne()
+
+        if obj is None:
+            return None
+
+        return self.model(*obj)
 
     def get(self, id: int):
         return self.getBy(self.id, id)
