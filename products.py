@@ -20,15 +20,15 @@ def display_products(db_context: DB):
             f"{product.id: >{id_len}} | {product.title: ^20} | {product.price : ^{price_len}.2f}$"
         )
 
+
 def select_product(db_context: DB, prod_id: int):
-    prod_id =int(input('Enter product id: '))
+    prod_id = int(input("Enter product id: "))
     product = db_context.products.get(prod_id)
     if not product:
         print("No such product")
         return
     print(f"{product.title} | {product.price:.2f}$")
-    
-    
+
 
 # pandas variant
 # def display_products(db_context: DB):
@@ -39,3 +39,24 @@ def select_product(db_context: DB, prod_id: int):
 #     df = pd.DataFrame([(p.id, p.title, f'{p.price:.2f}$') for p in products], columns=['id', 'title', 'price'])
 
 #     print(df.to_string(index=False))
+
+
+def add_product_in_basket(db, user_id, product_id):
+    products = list(
+        db.products_in_basket.getAll(
+            filter=f"product_id = {product_id} AND user_id = {user_id}"
+        )
+    )
+
+    if len(products) == 0:
+        db.products_in_basket.insert(
+            db.products_in_basket.model(
+                None, product_id, user_id, input("Введите количество: ")
+            )
+        )
+    else:
+        existing_product = products[0]
+        existing_product.count += int(input("Введите количество: "))
+        db.products_in_basket.update(existing_product)
+
+    print("Товар добавлен в корзину")
